@@ -26,9 +26,10 @@ public class authorization {
     public ResultSet UserPerms;
 
     // if auth result isnt success, PersonInfo etc. wont defined.
-    public authorization(String Username, String Password){
+    public String getAuthorized(String Username, String Password){
+        String result = "login";
         try{
-            ConnectionClass connect = new ConnectionClass();
+             ConnectionClass connect = new ConnectionClass();
             PreparedStatement  stm = (PreparedStatement) connect.connection.prepareStatement("SELECT UserType, UserId, PersonId FROM Users WHERE Username=? AND Password=?");
             stm.setString(1,Username);
             stm.setString(2,Password);
@@ -46,13 +47,17 @@ public class authorization {
                     stm.setInt(1, PersonInfoId);
                     UserPerms = stm.executeQuery();
                 }   
-                
+                    result =  "main";
+            }
+            else{
             }
         } catch (Exception ex)
         {
             System.out.println("Error: " + ex.getStackTrace());
         }
+        return result;
     }
+    
     public boolean isAuthStatus() {
         return authStatus;
     }
