@@ -9,12 +9,15 @@ import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
+import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Syste
  */
-
+@Named(value="auth")
+@SessionScoped
 public class authorization {
     public boolean authStatus = false;
     public int PersonInfoId;
