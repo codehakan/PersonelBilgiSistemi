@@ -43,7 +43,9 @@ public class authorization {
                     UserType = rs.getInt(1);
                     UserId = rs.getInt(2);
                     PersonInfoId = rs.getInt(3);
-                    stm = (PreparedStatement) connect.connection.prepareStatement("SELECT PermissionId, PemVisual, PermSet FROM UserPerms WHERE UserIdNum=?");
+                    stm = (PreparedStatement) connect.connection.prepareStatement("SELECT P.PermName, P.PermLink PemVisual, PermSet FROM UserPerms UP  " 
+                            + "INNER JOIN Perm P ON P.PermId = UP.PermissionId "
+                            + "WHERE UserIdNum=?");
                     stm.setInt(1, PersonInfoId);
                     UserPerms = stm.executeQuery();
                 }   
@@ -53,7 +55,7 @@ public class authorization {
             }
         } catch (Exception ex)
         {
-            System.out.println("Error: " + ex.getStackTrace());
+           ex.printStackTrace();
         }
         return result;
     }
