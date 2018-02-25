@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DatabaseData.AdminPage;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +19,9 @@ import javax.inject.Named;
 @Named(value="AdminPage")
 @SessionScoped
 public class AdminPageController {
-    public int PersonalId = 0;
-    public String PersonalName = "", PersonalSurname = "";
+   
+    public static AdminPage adminpage = new AdminPage();
+    
     public void findPersonalId(String CTNumber)
     {
         try{
@@ -29,23 +31,15 @@ public class AdminPageController {
           ResultSet rs = stm.executeQuery();
           while(rs.next())
           {
-              PersonalId = rs.getInt("PInfoId");
-              PersonalName = rs.getString("EName");
-              PersonalSurname = rs.getString("ESurname");
+              adminpage.PersonalId = rs.getInt("PInfoId");
+              adminpage.PersonalName = rs.getString("EName");
+              adminpage.PersonalSurname = rs.getString("ESurname");
           }
         }
         catch(Exception Ex)
         {
           Ex.printStackTrace();
         }
-    }
-    
-    public int getPersonalId() {
-        return PersonalId;
-    }
-
-    public void setPersonalId(int PersonalId) {
-        this.PersonalId = PersonalId;
     }
     
 }

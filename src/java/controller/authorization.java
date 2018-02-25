@@ -7,8 +7,8 @@ package controller;
 
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
@@ -16,7 +16,7 @@ import javax.inject.Named;
  *
  * @author Syste
  */
-@Named(value="auth")
+@ManagedBean(name="auth")
 @SessionScoped
 public class authorization {
     public boolean authStatus = false;
@@ -24,15 +24,36 @@ public class authorization {
     public int UserType;
     public int UserId;
     public ResultSet UserPerms;
+    public String username, password;
+    
+    public authorization(){
+        username="";
+        password="";
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     // if auth result isnt success, PersonInfo etc. wont defined.
-    public String getAuthorized(String Username, String Password){
-        String result = "login";
+    public String getAuthorized(){
+        String result = "index";
         try{
              ConnectionClass connect = new ConnectionClass();
             PreparedStatement  stm = (PreparedStatement) connect.connection.prepareStatement("SELECT UserType, UserId, PersonId FROM Users WHERE Username=? AND Password=?");
-            stm.setString(1,Username);
-            stm.setString(2,Password);
+            stm.setString(1,username);
+            stm.setString(2,password);
             ResultSet rs = stm.executeQuery();
             if(rs.next())
             {
@@ -59,6 +80,7 @@ public class authorization {
         }
         return result;
     }
+
     
     public boolean isAuthStatus() {
         return authStatus;
