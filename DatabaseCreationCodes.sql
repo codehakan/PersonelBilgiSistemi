@@ -133,7 +133,7 @@ CREATE TABLE PersonalInfo (
 	BirthDate DATE NOT NULL,
 	Communication INT NOT NULL,
 	Gender BINARY NOT NULL,
-	MaritalStatus BOOLEAN NOT NULL,
+	MaritalStatus BINARY NOT NULL,
 	PRIMARY KEY (PInfoId)
 );
 
@@ -6447,7 +6447,7 @@ ALTER TABLE EmployeeInfo ADD CONSTRAINT EmployeeInfo_fk0 FOREIGN KEY (InfoId) RE
 
 DELIMITER $$
 CREATE PROCEDURE AddPersonInfo(IN Pemail VARCHAR(50), IN Pphone DECIMAL, IN Padress VARCHAR(100), IN Pcity INT,
- in Pdistrict INT, IN Pname VARCHAR(50), IN Psurname NVARCHAR(50), IN ssNumber DECIMAL, IN ctNumber DECIMAL(11), IN PDate VARCHAR(10))
+ in Pdistrict INT, IN Pname VARCHAR(50), IN Psurname NVARCHAR(50), IN ssNumber DECIMAL, IN ctNumber DECIMAL(11), IN PDate VARCHAR(10), IN PMaritalStatus BINARY, IN PGender BINARY)
 BEGIN
 	DECLARE CommId INT;
 	DECLARE AdressId INT;
@@ -6455,8 +6455,8 @@ BEGIN
 	SET CommId =  LAST_INSERT_ID();
 	INSERT INTO AdressTable (Adress, City, District) VALUES (Padress, Pcity, Pdistrict);
 	SET AdressId = LAST_INSERT_ID();
-	Insert Into PersonalInfo (EName, ESurname, SocialSecurityNumber, CitizensShipNumber, Adress, BirthDate, Communication)
-	VALUES (Pname, Psurname, ssNumber, ctNumber, AdressId, PDate, CommId);
+	Insert Into PersonalInfo (EName, ESurname, SocialSecurityNumber, CitizensShipNumber, Adress, BirthDate, Communication, Gender, MaritalStatus)
+	VALUES (Pname, Psurname, ssNumber, ctNumber, AdressId, PDate, CommId, PGender, PMaritalStatus);
 END
 
 DELIMITER $$
