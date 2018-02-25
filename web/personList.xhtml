@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Personel Listeleme - Personel Takip Sistemi</title>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h:form>
+                <h:dataTable styleClass="table table-striped" value="#{personleInfoController.clist}" var="person">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{person.PInfoId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">EName</f:facet>
+                            #{person.EName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ESurname</f:facet>
+                            #{person.ESurname}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">SocialSecurityNumber</f:facet>
+                            #{person.socialSecurityNumber}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">CitizensShipNumber</f:facet>
+                            #{person.citizensShipNumber}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Adress</f:facet>
+                            #{person.adress}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">BirthDate</f:facet>
+                            #{person.birthDate}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Communication</f:facet>
+                            #{person.communication}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Gender</f:facet>
+                            #{person.gender}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">MaritalStatus</f:facet>
+                            #{person.maritalStatus}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+</html>
