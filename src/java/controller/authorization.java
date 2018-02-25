@@ -55,24 +55,21 @@ public class authorization {
             stm.setString(1,username);
             stm.setString(2,password);
             ResultSet rs = stm.executeQuery();
-            if(rs.next())
+            while(rs.next())
             {
-                while(rs.next())
-                {
                     stm.clearParameters();
                     authStatus = true;
                     UserType = rs.getInt(1);
                     UserId = rs.getInt(2);
                     PersonInfoId = rs.getInt(3);
                     stm = (PreparedStatement) connect.connection.prepareStatement("SELECT P.PermName, P.PermLink PemVisual, PermSet FROM UserPerms UP  " 
-                            + "INNER JOIN Perm P ON P.PermId = UP.PermissionId "
+                            + "INNER JOIN Perms P ON P.PermId = UP.PermissionId "
                             + "WHERE UserIdNum=?");
                     stm.setInt(1, PersonInfoId);
                     UserPerms = stm.executeQuery();
-                }   
+       
                     result =  "main";
-            }
-            else{
+                    System.out.println("Giriş");
             }
         } catch (Exception ex)
         {

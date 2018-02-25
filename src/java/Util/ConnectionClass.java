@@ -17,19 +17,13 @@ public class ConnectionClass {
       public Connection connection;
 
     public ConnectionClass() {
-        Connect();
-    }
-
-    public Connection Connect() {
-
-        com.mysql.jdbc.Connection result = null;
         try {
-            Class.forName("com.mysql.jdbc.Connection");
-            this.connection = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3340/employeeinfoaystem?user=root&password=1234");
+            Class.forName("com.mysql.jdbc.Driver");
+            this.connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3340/employeeinfosystem?user=root&password=1234");
         } catch (Exception err) {
             System.out.println(err.toString());
         }
-        return result;
     }
-
+    
+    
 }
