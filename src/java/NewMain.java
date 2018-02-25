@@ -1,6 +1,7 @@
 
 import Util.ConnectionClass;
 import dao.personalinfoDAO;
+import dao.usersDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,6 +23,9 @@ public class NewMain {
         db.Connect();
         personalinfoDAO test = new personalinfoDAO();
         test.getPersonalInfo();
+        
+        usersDAO test1 = new usersDAO();
+        test1.getUsers("hakan");
     }
     
 }

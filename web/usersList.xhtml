@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Kullanıcı Listeleme - Personel Takip Sistemi</title>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h:form>
+                <h:dataTable styleClass="table table-striped" value="#{usersController.clist}" var="user">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{user.userId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">USERNAME</f:facet>
+                            #{user.username}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">PASSWORD</f:facet>
+                            #{user.password}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">USER TYPE</f:facet>
+                            #{user.userType}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">PERSON ID</f:facet>
+                            #{user.personId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ACTION</f:facet>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger">DELETE</button>
+                            <button type="button" class="btn btn-info">EDIT</button>
+                            <button type="button" class="btn btn-primary">UPDATE</button>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+</html>
