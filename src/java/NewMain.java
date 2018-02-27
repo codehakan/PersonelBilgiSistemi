@@ -22,10 +22,7 @@ public class NewMain {
         ConnectionClass db = new ConnectionClass();
         db.Connect();
         personalinfoDAO test = new personalinfoDAO();
-        test.getPersonalInfo();
-        
-        usersDAO test1 = new usersDAO();
-        test1.getUsers("hakan");
+        test.getPersonalInfo("Hakan");
     }
     
 }
