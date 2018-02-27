@@ -40,7 +40,8 @@ public class personalinfoDAO {
         return clist;
     }
 
-    public void getPersonalInfo(String userName) {
+    public List<personalinfo>getPersonalInfo(String userName) {
+        List<personalinfo> clist = new ArrayList();
         try {
             ConnectionClass connection = new ConnectionClass();
             PreparedStatement stm = (PreparedStatement) connection.Connect().prepareStatement("select PInfoId,EName,ESurname,SocialSecurityNumber,CitizensShipNumber,Adress,BirthDate,Communication,Gender,MaritalStatus from personalinfo where EName = ?");
@@ -57,10 +58,13 @@ public class personalinfoDAO {
                 System.out.println(rs.getInt("Communication"));
                 System.out.println(rs.getBoolean("Gender"));
                 System.out.println(rs.getInt("MaritalStatus"));
+                personalinfo tmp = new personalinfo(rs.getInt("PInfoId"), rs.getString("EName"), rs.getString("ESurname"), rs.getString("SocialSecurityNumber"), rs.getString("CitizensShipNumber"), rs.getInt("Adress"), rs.getDate("BirthDate"), rs.getInt("Communication"), rs.getBoolean("Gender"), rs.getInt("MaritalStatus"));
+                clist.add(tmp);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return clist;
     }
 
 }
