@@ -30,6 +30,7 @@ public class PersonleInfoController implements Serializable{
 
     public List<personalinfo> getClist() {
         this.clist = this.getCdao().getPersonalInfo();
+        //this.clist = this.getCdao().getPersonalInfo("Hakan");
         return clist;
     }
 

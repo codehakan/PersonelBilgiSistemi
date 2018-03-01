@@ -9,9 +9,11 @@ import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import entity.personalinfo;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class personalinfoDAO {
         return clist;
     }
 
-    public List<personalinfo>getPersonalInfo(String userName) {
+    public List<personalinfo> getPersonalInfo(String userName) {
         List<personalinfo> clist = new ArrayList();
         try {
             ConnectionClass connection = new ConnectionClass();
@@ -65,6 +67,67 @@ public class personalinfoDAO {
             System.out.println(ex.getMessage());
         }
         return clist;
+    }
+
+    public void addPersonal(String EName, String ESurname, String SocialSecurityNumber, String CitizensShipNumber, String Adress, int City, int District, Date BirthDate, String PhoneNumber, String Email, boolean Gender, int MaritalStatus) {
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "insert into personalinfo (EName,ESurname, SocialSecurityNumber,CitizensShipNumber,Adress,BirthDate,Communication,Gender,MaritalStatus) values(?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, EName);
+            ps.setString(2, ESurname);
+            ps.setString(3, SocialSecurityNumber);
+            ps.setString(4, CitizensShipNumber);
+            ps.setInt(5, addAdress(Adress, City, District));
+            ps.setDate(6, BirthDate);
+            ps.setInt(7, addCommunication(PhoneNumber, Email));
+            ps.setBoolean(8, Gender);
+            ps.setInt(9, MaritalStatus);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int addAdress(String Adress, int City, int District) {
+        int AdressId=0;
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "insert into adresstable (Adress,City,District) values(?,?,?)";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, Adress);
+            ps.setInt(2, City);
+            ps.setInt(3, District);
+            ps.executeUpdate();
+            ResultSet rs = ps.executeQuery("SELECT LAST_INSERT_ID()");
+            if(rs.next())
+                AdressId = rs.getInt(1);
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return AdressId;
+    }
+
+    public int addCommunication(String PhoneNumber, String Email) {
+        int communicationId = 0;
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "insert into commtable (PhoneNumber,Email) values(?,?)";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, PhoneNumber);
+            ps.setString(2, Email);
+            ps.executeUpdate();
+            ResultSet rs = ps.executeQuery("SELECT LAST_INSERT_ID()");
+            if(rs.next())
+                communicationId = rs.getInt(1);
+            //System.out.println(communicationId + " iletişim id budur.");
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return communicationId;
     }
 
 }
