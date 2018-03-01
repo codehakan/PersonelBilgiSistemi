@@ -13,7 +13,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class personalinfoDAO {
     }
 
     public int addAdress(String Adress, int City, int District) {
-        int AdressId=0;
+        int AdressId = 0;
         try {
             ConnectionClass connection = new ConnectionClass();
             String sorgu = "insert into adresstable (Adress,City,District) values(?,?,?)";
@@ -101,8 +100,9 @@ public class personalinfoDAO {
             ps.setInt(3, District);
             ps.executeUpdate();
             ResultSet rs = ps.executeQuery("SELECT LAST_INSERT_ID()");
-            if(rs.next())
+            if (rs.next()) {
                 AdressId = rs.getInt(1);
+            }
             ps.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -120,8 +120,9 @@ public class personalinfoDAO {
             ps.setString(2, Email);
             ps.executeUpdate();
             ResultSet rs = ps.executeQuery("SELECT LAST_INSERT_ID()");
-            if(rs.next())
+            if (rs.next()) {
                 communicationId = rs.getInt(1);
+            }
             //System.out.println(communicationId + " iletişim id budur.");
             ps.close();
         } catch (Exception e) {
