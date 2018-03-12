@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<title>Personel Takip Sistemi</title>
+	<link rel="stylesheet" href="stil.css">
+</head>
+<style>
+	
+	.sablon{width:1500px; height: auto; margin: 30px 0}
+.logo{width: 100px; height: 100px; float: right}
+.banner{width: auto; height: 80px; margin 0 0 0 10px; background-color:#0F4C76; border-radius:10px; color:#F7E9E9; font:normal 30px"Times New Roman"; text-align: left; padding: 40px 0 0 20px}
+.menu{width: 200px;height: 600px;float:left; margin:10px 10px 0 10px; background: #0F4C76; border-radius:10px;}
+.alan{width: 1080px; height: 600px;float: left; margin: 10px 0 0 0;background: #0F4C76; border-radius:10px;}
+	/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+	width: 240px;
+	height: 240px;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+	.girisiOrtala{
+		margin: 0px 0px 0px 450px;
+	}
+	.butonuOrtala{
+		margin-left: 100px;
+	}
+	
+	</style>
+<body>
+	
+	<div class="sablon">
+		<div class="logo"><img src="img/user.png" width="100" height="110" ></div>
+				<div class="banner">PERSONEL BİLGİ SİSTEMİ</div>
+       <div class="menu">
+		   <table border="1" width="200" bgcolor="SteelBlue	">
+				   
+			   
+			   <tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">Ana Sayfa</font></td>
+			   </tr>
+			   <tr>
+				   <td height="50"  align="center"><font color="#F7E9E9" face="Tw Cen MT">Kullanıcı Ayarları </font></td>
+			   </tr>
+			   <tr>
+				   <td height="50"  align="center"><font color="#F7E9E9" face="Tw Cen MT">Personel İşlemleri</font></td>
+			   </tr><tr>
+				   <td height="50"  align="center"><font color="#F7E9E9" face="Tw Cen MT">Departman Ayarları</font></td>
+			   </tr>
+			   <tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">İzin İşlemleri</font></td>
+			   </tr>
+			   <tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">Raporlama Servisi</font></td>
+			   </tr>
+			   <tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">İletişim Bilgileri</font></td>
+			   </tr><tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">Güvenlik Ayarları</font></td>
+			   </tr>
+			   <tr>
+				   <td height="50" align="center"><font color="#F7E9E9" face="Tw Cen MT">Çıkış Yap</font></td>
+			   </tr>
+		   </table>
+		</div>
+		<div class="alan">
+		<form action="action_page.php">
+  <div class="imgcontainer">
+    <img src="img/user2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+	  <div class="girisiOrtala">
+    <label for="uname"><b>Kullanıcı Adı  :</b></label>
+    <input type="text" placeholder="Kullanıcı Adınızı Girin" name="uname" required><br>
+
+    <label for="psw"><b>Kullanıcı Şifre</b></label>
+    <input type="password" placeholder="Kullanıcı Şifrenizi Girin" name="psw" required><br>
+
+    <div class="butonuOrtala">
+		  <button type="submit">Login</button>
+		<label>
+      <input type="checkbox" checked="checked" name="remember"> Beni Hatırla
+    </label>
+		  </div>
+    
+  </div>
+	  </div>
+
+</form>
+		</div>
+	</div>
+	
+</body>
+</html>

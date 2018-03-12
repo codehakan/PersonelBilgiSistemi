@@ -22,9 +22,11 @@ public class NewMain {
         personalinfoDAO test = new personalinfoDAO();
         //test.getPersonalInfo("Hakan");
         
-        test.addPersonal("Hakan","Akkaya","007","500","Sivas Merkez Diriliş Mahallesi",58,0,null,"5457247036","code.hakan@gmail.com",false,2);
+        //test.addPersonal("Hakan","Akkaya","007","500","Sivas Merkez Diriliş Mahallesi",58,0,null,"5457247036","code.hakan@gmail.com",false,2);
         //test.addAdress("Deneme Adres olarak Ekliyorum", 58, 5);
-        //test.addCommunication("5457247235", "code.haksan@gmail.com");
+        //test.addCommunication("5457247235", "code.hakan@gmail.com");
+        //test.updatePersonalInfo("Hakan","Akkaya","007","500","Sivas Merkez Diriliş Mahallesi",58,0,null,"5457247036","code.hakan@gmail.com",false,2,1);
+        test.searchPersonalName("melih kaan");
     }
     
 }

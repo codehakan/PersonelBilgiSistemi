@@ -29,11 +29,12 @@ public class personalinfoDAO {
         System.out.println("test");
         try {
             Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("select * from personalinfo");
+            ResultSet rs = st.executeQuery("select PInfoId,EName,ESurname,SocialSecurityNumber,CitizensShipNumber,Adress,BirthDate,Communication,Gender,MaritalStatus from personalinfo");
             while (rs.next()) {
                 //System.out.println(rs.getString("EName"));
                 personalinfo tmp = new personalinfo(rs.getInt("PInfoId"), rs.getString("EName"), rs.getString("ESurname"), rs.getString("SocialSecurityNumber"), rs.getString("CitizensShipNumber"), rs.getInt("Adress"), rs.getDate("BirthDate"), rs.getInt("Communication"), rs.getBoolean("Gender"), rs.getInt("MaritalStatus"));
                 clist.add(tmp);
+                System.out.println(tmp);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -41,7 +42,7 @@ public class personalinfoDAO {
         return clist;
     }
 
-    public List<personalinfo> getPersonalInfo(String userName) {
+    public List<personalinfo> searchPersonalName(String userName) {
         List<personalinfo> clist = new ArrayList();
         try {
             ConnectionClass connection = new ConnectionClass();
@@ -49,7 +50,7 @@ public class personalinfoDAO {
             stm.setString(1, userName);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getInt("PInfoId"));
+                /*System.out.println(rs.getInt("PInfoId"));
                 System.out.println(rs.getString("EName"));
                 System.out.println(rs.getString("ESurname"));
                 System.out.println(rs.getString("SocialSecurityNumber"));
@@ -58,16 +59,17 @@ public class personalinfoDAO {
                 System.out.println(rs.getDate("BirthDate"));
                 System.out.println(rs.getInt("Communication"));
                 System.out.println(rs.getBoolean("Gender"));
-                System.out.println(rs.getInt("MaritalStatus"));
+                System.out.println(rs.getInt("MaritalStatus"));*/
                 personalinfo tmp = new personalinfo(rs.getInt("PInfoId"), rs.getString("EName"), rs.getString("ESurname"), rs.getString("SocialSecurityNumber"), rs.getString("CitizensShipNumber"), rs.getInt("Adress"), rs.getDate("BirthDate"), rs.getInt("Communication"), rs.getBoolean("Gender"), rs.getInt("MaritalStatus"));
                 clist.add(tmp);
+                System.out.println(tmp);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return clist;
     }
-
+    
     public void addPersonal(String EName, String ESurname, String SocialSecurityNumber, String CitizensShipNumber, String Adress, int City, int District, Date BirthDate, String PhoneNumber, String Email, boolean Gender, int MaritalStatus) {
         try {
             ConnectionClass connection = new ConnectionClass();
@@ -88,7 +90,30 @@ public class personalinfoDAO {
             System.out.println(e.getMessage());
         }
     }
-
+    
+    public void updatePersonalInfo(String EName, String ESurname, String SocialSecurityNumber, String CitizensShipNumber, String Adress, int City, int District, Date BirthDate, String PhoneNumber, String  Email, boolean Gender, int MaritalStatus, int PInfoId)
+    {
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "UPDATE personalinfo SET EName=?, ESurname=?, SocialSecurityNumber=?,CitizensShipNumber=?, Adress=?, BirthDate=?, Communication=?, Gender=?, MaritalStatus=? where PInfoId=?";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, EName);
+            ps.setString(2, ESurname);
+            ps.setString(3, SocialSecurityNumber);
+            ps.setString(4, CitizensShipNumber);
+            ps.setInt(5, updateAdress(Adress, City, District, PInfoId));
+            ps.setDate(6, BirthDate);
+            ps.setInt(7, updateCommunication(PhoneNumber, Email, PInfoId));
+            ps.setBoolean(8, Gender);
+            ps.setInt(9, MaritalStatus);
+            ps.setInt(10, PInfoId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Hata:"+e.getMessage());
+        }
+    }
+    
     public int addAdress(String Adress, int City, int District) {
         int AdressId = 0;
         try {
@@ -109,7 +134,25 @@ public class personalinfoDAO {
         }
         return AdressId;
     }
-
+    
+    public int updateAdress(String Adress, int City, int District, int AdressId)
+    {
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "UPDATE adresstable SET Adress=?, City=?, District=? where AdressId=?";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, Adress);
+            ps.setInt(2, City);
+            ps.setInt(3, District);
+            ps.setInt(4, AdressId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Hata:"+e.getMessage());
+        }
+        return AdressId;
+    }
+    
     public int addCommunication(String PhoneNumber, String Email) {
         int communicationId = 0;
         try {
@@ -129,6 +172,23 @@ public class personalinfoDAO {
             System.out.println(e.getMessage());
         }
         return communicationId;
+    }
+    
+    public int updateCommunication(String PhoneNumber, String Email, int CommId)
+    {
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String sorgu = "UPDATE commtable SET PhoneNumber=?, Email=? where CommId=?";
+            PreparedStatement ps = (PreparedStatement) connection.Connect().prepareStatement(sorgu);
+            ps.setString(1, PhoneNumber);
+            ps.setString(2, Email);
+            ps.setInt(3, CommId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Hata: "+e.getMessage());
+        }
+        return CommId;
     }
 
 }
